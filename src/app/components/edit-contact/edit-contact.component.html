@@ -1,0 +1,48 @@
+<h2>
+	<button mat-icon-button routerLink="/">
+		<mat-icon>arrow_back</mat-icon>
+	</button>
+	<ng-template [ngIf]="editingContact == null" [ngIfElse]="editContact">
+		New Contact
+	</ng-template>
+	<ng-template #editContact>
+		Edit Contact
+	</ng-template>
+</h2>
+<form #form [formGroup]="contactDetails">
+	<mat-form-field appearance="fill">
+		<mat-label>First Name</mat-label>
+		<input matInput type="text" formControlName="firstName" />
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Last Name</mat-label>
+		<input matInput type="text" formControlName="lastName" />
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Phone Number</mat-label>
+		<input matInput type="text" formControlName="phoneNumber" />
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Email Address</mat-label>
+		<input matInput type="text" formControlName="email" />
+	</mat-form-field>
+
+	<mat-form-field appearance="fill" class="wide">
+		<mat-label>Address</mat-label>
+		<textarea matInput formControlName="address" rows="4"></textarea>
+	</mat-form-field>
+
+	<div class="wide center">
+		<button mat-raised-button color="accent" type="submit" [disabled]="!contactDetails.valid">
+			<ng-template [ngIf]="editingContact == null" [ngIfElse]="editContact">
+				Add
+			</ng-template>
+			<ng-template #editContact>
+				Update
+			</ng-template>
+		</button>
+	</div>
+</form>

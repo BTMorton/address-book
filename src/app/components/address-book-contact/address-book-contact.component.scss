@@ -1,0 +1,25 @@
+:host {
+	text-align: center;
+
+	.mat-mdc-card {
+		min-width: 200px;
+		padding: 20px;
+
+		.profile {
+			width: 200px;
+			height: 200px;
+			font-size: 200px;
+			margin: 0 auto;
+		}
+
+		:not(button) {
+			> .mat-icon {
+				vertical-align: sub;
+			}
+		}
+
+		.address {
+			white-space: pre-line;
+		}
+	}
+}

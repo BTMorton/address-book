@@ -1,0 +1,31 @@
+<mat-card *ngIf="contact != null">
+	<button mat-icon-button matDialogClose>
+		<mat-icon class="close" matTooltip="Close">close</mat-icon>
+	</button>
+	<mat-icon class="profile">account_circle</mat-icon>
+	<h1>
+		{{contact.firstName}} {{contact.lastName}}
+	</h1>
+	<div>
+		<button mat-icon-button [routerLink]="['/edit/', contact.id]" matDialogClose>
+			<mat-icon>edit</mat-icon>
+		</button>
+		<button mat-icon-button (click)="removeContact(contact)" matDialogClose>
+			<mat-icon>delete</mat-icon>
+		</button>
+	</div>
+	<div>
+		<mat-icon>phone</mat-icon>
+		{{contact.phoneNumber}}
+		<br />
+
+		<mat-icon>email</mat-icon>
+		{{contact.email}}
+	</div>
+	<div>
+		<h2>Address</h2>
+		<span class="address">
+			{{contact.address}}
+		</span>
+	</div>
+</mat-card>

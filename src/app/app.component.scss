@@ -1,0 +1,24 @@
+:host {
+	grid-template-rows: max-content auto;
+	grid-template-columns: auto max-content auto;
+	grid-row-gap: 20px;
+	display: grid;
+	height: 100%;
+
+	.content-container {
+		max-width: 100%;
+		width: 1024px;
+		height: 100%;
+		grid-column: 2;
+		grid-row: 2;
+	}
+
+	mat-toolbar {
+		grid-row: 1;
+		grid-column: 1 / span 3;
+
+		.spacer {
+			flex: 1 1 auto;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+	<span>Address Book</span>
+	<span class="spacer"></span>
+	<button routerLink="/add" mat-mini-fab color="accent" aria-label="Add a new contact" matTooltip="New Contact">
+		<mat-icon>add</mat-icon>
+	</button>
+</mat-toolbar>
+
+<mat-card class="content-container">
+	<router-outlet></router-outlet>
+</mat-card>

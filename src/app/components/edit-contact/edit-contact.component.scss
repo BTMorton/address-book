@@ -1,0 +1,25 @@
+:host {
+	margin: 10px 20px;
+
+	h2 {
+		button {
+			vertical-align: sub;
+		}
+	}
+
+	form {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 20px;
+
+		.wide {
+			grid-column: 1 / span 2;
+
+			&.center {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+			}
+		}
+	}
+}
