@@ -11,16 +11,16 @@ import { AddressBookService } from 'src/app/services/address-book.service';
 	styleUrls: ['./edit-contact.component.scss']
 })
 export class EditContactComponent implements AfterViewInit, OnDestroy {
-	//	Generic phone number regex, found at: https://uibakery.io/regex-library/phone-number
-	#phoneRegex = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}(\s*x[0-9]{1,5})?$/
-	#unsubscribe = new Subject<void>();
+	//	Generic intl phone number regex, based on one found at: https://uibakery.io/regex-library/phone-number
+	static readonly PhoneRegex = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}(\s*x[0-9]{1,5})?$/
+	readonly #unsubscribe = new Subject<void>();
 
 	public editingContact?: IAddressBookContact;
 	@ViewChild("form") public formElement?: ElementRef;
 	public contactDetails = new FormGroup({
 		firstName: new FormControl("", { nonNullable: true, validators: [ Validators.required ]}),
 		lastName: new FormControl("", { nonNullable: true, validators: [ Validators.required ]}),
-		phoneNumber: new FormControl("", { nonNullable: true, validators: [ Validators.pattern(this.#phoneRegex) ] }),
+		phoneNumber: new FormControl("", { nonNullable: true, validators: [ Validators.pattern(EditContactComponent.PhoneRegex) ] }),
 		email: new FormControl("", { nonNullable: true, validators: [ Validators.email ] }),
 		address: new FormControl("", { nonNullable: true }),
 	});
@@ -39,7 +39,7 @@ export class EditContactComponent implements AfterViewInit, OnDestroy {
 				this.editingContact = contact;
 
 				if (contact != null)
-					//	Casting contact as any due to the typing differences between the interface and the form
+					//	Need to re-create the object to match the form's type and fill in any blank properties
 					this.contactDetails.setValue({
 						firstName: contact.firstName,
 						lastName: contact.lastName,
@@ -55,6 +55,8 @@ export class EditContactComponent implements AfterViewInit, OnDestroy {
 			.pipe(
 				takeUntil(this.#unsubscribe),
 				filter(() => this.contactDetails.valid),
+				//	Need to ensure first and last name are specified as they are required by the interface
+				//	Default empty values will be overriden by the spread operator
 				map(() => ({
 					firstName: "",
 					lastName: "",

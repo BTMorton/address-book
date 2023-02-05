@@ -6,9 +6,9 @@ import { ReplaySubject } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
 })
-export class 	AddressBookService {
+export class AddressBookService {
+	readonly #contactChangeSubject = new ReplaySubject<IAddressBookContact[]>(1);
 	#contacts = new Map<number, IAddressBookContact>();
-	#contactChangeSubject = new ReplaySubject<IAddressBookContact[]>(1);
 	#nextId = 1;
 
 	constructor() {

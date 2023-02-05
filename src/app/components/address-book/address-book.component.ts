@@ -14,7 +14,7 @@ import { AddressBookContactComponent } from '../address-book-contact/address-boo
 	styleUrls: ['./address-book.component.scss']
 })
 export class AddressBookComponent implements AfterViewInit, OnDestroy {
-	#unsubscribe = new Subject<void>();
+	readonly #unsubscribe = new Subject<void>();
 	#contacts: IAddressBookContact[] = [];
 
 	@ViewChild(MatSort, { static: false })
